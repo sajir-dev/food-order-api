@@ -1,0 +1,9 @@
+server:
+  port: "8080"
+  host: "0.0.0.0"
+database:
+  dsn: "food_ordering:food_ordering@tcp(localhost:3306)/food_ordering?parseTime=true"
+  max_open_conns: 10
+  max_idle_conns: 5
+api:
+  key: "apitest" 

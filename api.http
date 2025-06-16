@@ -1,0 +1,45 @@
+@baseUrl = http://localhost:8080
+@contentType = application/json
+
+### List all products
+GET {{baseUrl}}/api/products
+Content-Type: {{contentType}}
+
+### Get a specific product
+GET {{baseUrl}}/api/products/1
+Content-Type: {{contentType}}
+
+### Place a new order
+POST {{baseUrl}}/api/orders
+Content-Type: {{contentType}}
+
+{
+    "items": [
+        {
+            "productId": "1",
+            "quantity": 2
+        },
+        {
+            "productId": "2",
+            "quantity": 1
+        }
+    ],
+    "customer_name": "John Doe",
+    "delivery_address": "123 Main St, City, Country"
+}
+
+### Place an order with invalid data (for testing error handling)
+POST {{baseUrl}}/api/orders
+Content-Type: {{contentType}}
+
+{
+    "items": [
+        {
+            "productId": "999",
+            "quantity": 0
+        }
+    ],
+    "customer_name": "",
+    "delivery_address": ""
+}
+
