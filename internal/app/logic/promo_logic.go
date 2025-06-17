@@ -2,6 +2,7 @@ package logic
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 	"path/filepath"
 	"sync"
@@ -30,6 +31,8 @@ func (l *promoLogic) ValidatePromo(couponCode string) (bool, error) {
 	errors := make(chan error, len(l.files))
 
 	var wg sync.WaitGroup
+
+	fmt.Println(l.files)
 
 	// Search each file in a separate goroutine
 	for _, filename := range l.files {
