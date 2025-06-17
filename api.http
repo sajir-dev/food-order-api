@@ -24,8 +24,7 @@ Content-Type: {{contentType}}
             "quantity": 1
         }
     ],
-    "customer_name": "John Doe",
-    "delivery_address": "123 Main St, City, Country"
+    "couponCode": "QYYSPC46"
 }
 
 ### Place an order with invalid data (for testing error handling)

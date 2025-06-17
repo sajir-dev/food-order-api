@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"path/filepath"
 	"syscall"
 	"time"
 
@@ -51,9 +52,17 @@ func main() {
 	productLogic := logic.NewProductLogic(productDAO)
 	orderLogic := logic.NewOrderLogic(orderDAO, productDAO)
 
+	// Get the absolute path to the coupons directory
+	couponDir, err := filepath.Abs("coupons")
+	if err != nil {
+		logger.Error("failed to get absolute path for coupons directory", "error", err)
+		os.Exit(1)
+	}
+	promoLogic := logic.NewPromoLogic(couponDir, []string{"couponbase1", "couponbase2", "couponbase3"})
+
 	// Initialize handlers
 	productHandler := handler.NewProductHandler(productLogic)
-	orderHandler := handler.NewOrderHandler(orderLogic)
+	orderHandler := handler.NewOrderHandler(orderLogic, promoLogic)
 
 	// Create a new Gin router
 	router := gin.Default()
