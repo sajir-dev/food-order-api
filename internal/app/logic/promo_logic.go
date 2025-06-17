@@ -2,7 +2,6 @@ package logic
 
 import (
 	"bufio"
-	"fmt"
 	"os"
 	"path/filepath"
 	"sync"
@@ -32,8 +31,6 @@ func (l *promoLogic) ValidatePromo(couponCode string) (bool, error) {
 
 	var wg sync.WaitGroup
 
-	fmt.Println(l.files)
-
 	// Search each file in a separate goroutine
 	for _, filename := range l.files {
 		wg.Add(1)
@@ -51,8 +48,8 @@ func (l *promoLogic) ValidatePromo(couponCode string) (bool, error) {
 			// Use buffered reading for memory efficiency
 			scanner := bufio.NewScanner(file)
 			// Set a larger buffer size for better performance
-			buf := make([]byte, 1024*1024)    // 1MB buffer
-			scanner.Buffer(buf, 10*1024*1024) // Allow up to 10MB per line
+			buf := make([]byte, 20*1024*1024) // 20MB buffer
+			scanner.Buffer(buf, 20*1024*1024) // Allow up to 20MB per line
 
 			found := false
 			for scanner.Scan() {
