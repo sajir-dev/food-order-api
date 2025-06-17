@@ -10,13 +10,14 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/gin-gonic/gin"
+	_ "github.com/go-sql-driver/mysql"
+
 	"food-ordering-api/internal/app/dao"
 	"food-ordering-api/internal/app/handler"
 	"food-ordering-api/internal/app/logic"
 	"food-ordering-api/internal/config"
-
-	"github.com/gin-gonic/gin"
-	_ "github.com/go-sql-driver/mysql"
+	"food-ordering-api/internal/middleware"
 )
 
 func main() {
@@ -59,7 +60,7 @@ func main() {
 
 	// Add middleware
 	router.Use(gin.Recovery())
-	router.Use(gin.Logger())
+	router.Use(middleware.Logging())
 
 	// Register API routes
 	// Product routes
