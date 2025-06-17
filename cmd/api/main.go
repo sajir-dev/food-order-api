@@ -50,10 +50,11 @@ func main() {
 	// Initialize logic layers
 	productLogic := logic.NewProductLogic(productDAO)
 	orderLogic := logic.NewOrderLogic(orderDAO, productDAO)
+	promoLogic := logic.NewPromoLogic("coupons", []string{"couponbase1", "couponbase2", "couponbase3"})
 
 	// Initialize handlers
 	productHandler := handler.NewProductHandler(productLogic)
-	orderHandler := handler.NewOrderHandler(orderLogic)
+	orderHandler := handler.NewOrderHandler(orderLogic, promoLogic)
 
 	// Create a new Gin router
 	router := gin.Default()
